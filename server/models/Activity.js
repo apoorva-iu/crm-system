@@ -26,4 +26,5 @@ const activitySchema = new mongoose.Schema(
   }
 );
 
+console.log("Activity model initialized.");
 module.exports = mongoose.model("Activity", activitySchema);

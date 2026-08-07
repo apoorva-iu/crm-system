@@ -1,111 +1,379 @@
+/* ==========================================================================
+   Login.css
+   Professional SaaS/CRM Login Page Styling
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. CSS Variables / Design Tokens
+   -------------------------------------------------------------------------- */
 :root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+  --color-primary: #4f46e5;
+  --color-primary-hover: #4338ca;
+  --color-primary-active: #3730a3;
+  --color-primary-light: #eef2ff;
 
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
+  --color-bg-start: #eef1fb;
+  --color-bg-end: #e4e9f7;
 
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  --color-card-bg: #ffffff;
+  --color-border: #e2e5ec;
+  --color-border-focus: #4f46e5;
 
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
+  --color-text-primary: #1a1d29;
+  --color-text-secondary: #5f6472;
+  --color-text-muted: #9599a6;
+
+  --color-error-bg: #fef2f2;
+  --color-error-border: #fecaca;
+  --color-error-text: #b91c1c;
+
+  --radius-md: 10px;
+  --radius-lg: 16px;
+
+  --shadow-card: 0 20px 45px -15px rgba(24, 28, 47, 0.18),
+    0 4px 12px -2px rgba(24, 28, 47, 0.06);
+  --shadow-focus: 0 0 0 4px rgba(79, 70, 229, 0.15);
+
+  --font-family: "Inter", "Segoe UI", system-ui, -apple-system,
+    "Helvetica Neue", Arial, sans-serif;
+
+  --transition-fast: 150ms ease;
+  --transition-medium: 220ms ease;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-  }
-
-  #social .button-icon {
-    filter: invert(1) brightness(2);
-  }
+/* --------------------------------------------------------------------------
+   2. Base / Reset
+   -------------------------------------------------------------------------- */
+* {
+  box-sizing: border-box;
 }
 
 body {
   margin: 0;
+  font-family: var(--font-family);
+  color: var(--color-text-primary);
 }
 
-#root {
-  width: 1126px;
-  max-width: 100%;
-  margin: 0 auto;
+/* --------------------------------------------------------------------------
+   3. Page Wrapper / Background
+   -------------------------------------------------------------------------- */
+.login-page {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  overflow: hidden;
+
+  background: linear-gradient(160deg, var(--color-bg-start) 0%, var(--color-bg-end) 100%);
+}
+
+/* Subtle decorative background elements */
+.login-page::before,
+.login-page::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.35;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.login-page::before {
+  width: 420px;
+  height: 420px;
+  top: -140px;
+  left: -120px;
+  background: radial-gradient(circle at 30% 30%, #818cf8, transparent 70%);
+}
+
+.login-page::after {
+  width: 480px;
+  height: 480px;
+  bottom: -160px;
+  right: -140px;
+  background: radial-gradient(circle at 70% 70%, #a5b4fc, transparent 70%);
+}
+
+/* --------------------------------------------------------------------------
+   4. Login Card
+   -------------------------------------------------------------------------- */
+.login-card {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 420px;
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  padding: 40px 36px 36px;
+}
+
+.login-card h1 {
+  margin: 0 0 6px;
+  font-size: 1.65rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
   text-align: center;
-  border-inline: 1px solid var(--border);
-  min-height: 100svh;
+  color: var(--color-text-primary);
+}
+
+.login-card > p {
+  margin: 0 0 28px;
+  font-size: 0.95rem;
+  text-align: center;
+  color: var(--color-text-secondary);
+}
+
+/* --------------------------------------------------------------------------
+   5. Form Layout
+   -------------------------------------------------------------------------- */
+.login-card form {
   display: flex;
   flex-direction: column;
-  box-sizing: border-box;
+  gap: 20px;
 }
 
-h1,
-h2 {
-  font-family: var(--heading);
+.login-card form > div {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.login-card label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+/* --------------------------------------------------------------------------
+   6. Inputs
+   -------------------------------------------------------------------------- */
+.login-card input[type="email"],
+.login-card input[type="password"],
+.login-card input[type="text"] {
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  color: var(--color-text-primary);
+  background-color: #fafbfc;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  outline: none;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast),
+    background-color var(--transition-fast);
+}
+
+.login-card input::placeholder {
+  color: var(--color-text-muted);
+}
+
+.login-card input:hover {
+  border-color: #c7cbd6;
+}
+
+.login-card input:focus {
+  border-color: var(--color-border-focus);
+  background-color: #ffffff;
+  box-shadow: var(--shadow-focus);
+}
+
+.login-card input:disabled {
+  background-color: #f2f3f6;
+  color: var(--color-text-muted);
+  cursor: not-allowed;
+}
+
+/* Invalid state (leverages native HTML5 validation) */
+.login-card input:invalid:not(:placeholder-shown):not(:focus) {
+  border-color: var(--color-error-border);
+}
+
+/* --------------------------------------------------------------------------
+   7. Button
+   -------------------------------------------------------------------------- */
+.login-card button[type="submit"] {
+  margin-top: 6px;
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 0.98rem;
+  font-weight: 600;
+  font-family: inherit;
+  color: #ffffff;
+  background-color: var(--color-primary);
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background-color var(--transition-fast), transform var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+.login-card button[type="submit"]:hover {
+  background-color: var(--color-primary-hover);
+}
+
+.login-card button[type="submit"]:active {
+  background-color: var(--color-primary-active);
+  transform: translateY(1px);
+}
+
+.login-card button[type="submit"]:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+}
+
+.login-card button[type="submit"]:disabled {
+  background-color: #a5a9f5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Optional loading state — add className="loading" to the button in JSX
+   to enable this style (does not require markup changes to function,
+   the button will simply ignore this rule if the class is absent) */
+.login-card button[type="submit"].loading {
+  position: relative;
+  color: transparent;
+}
+
+.login-card button[type="submit"].loading::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 18px;
+  height: 18px;
+  margin: -9px 0 0 -9px;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: login-spin 0.7s linear infinite;
+}
+
+@keyframes login-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   8. Error Message
+   -------------------------------------------------------------------------- */
+/* Add a <p className="error-message">...</p> or <div className="error-message">
+   inside the form to use this style — no JSX changes required for the CSS
+   itself to be valid. */
+.error-message {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  font-size: 0.85rem;
   font-weight: 500;
-  color: var(--text-h);
+  color: var(--color-error-text);
+  background-color: var(--color-error-bg);
+  border: 1px solid var(--color-error-border);
+  border-radius: var(--radius-md);
 }
 
-h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
+/* --------------------------------------------------------------------------
+   9. Responsive Breakpoints
+   -------------------------------------------------------------------------- */
+
+/* Tablet */
+@media (max-width: 768px) {
+  .login-card {
+    max-width: 380px;
+    padding: 34px 28px 30px;
   }
 }
-h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
-  margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
+
+/* Mobile */
+@media (max-width: 480px) {
+  .login-page {
+    padding: 16px;
+    align-items: flex-start;
+    padding-top: 64px;
+  }
+
+  .login-card {
+    max-width: 100%;
+    padding: 28px 22px 26px;
+    border-radius: var(--radius-md);
+  }
+
+  .login-card h1 {
+    font-size: 1.4rem;
   }
 }
-p {
-  margin: 0;
+/* =========================================
+   Register Page
+   ========================================= */
+
+.login-card select {
+    width: 100%;
+    padding: 12px 14px;
+    font-size: 0.95rem;
+    font-family: inherit;
+    color: var(--color-text-primary);
+    background-color: #fafbfc;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    outline: none;
+    cursor: pointer;
+
+    transition:
+        border-color var(--transition-fast),
+        box-shadow var(--transition-fast),
+        background-color var(--transition-fast);
 }
 
-code,
-.counter {
-  font-family: var(--mono);
-  display: inline-flex;
-  border-radius: 4px;
-  color: var(--text-h);
+.login-card select:hover {
+    border-color: #c7cbd6;
 }
 
-code {
-  font-size: 15px;
-  line-height: 135%;
-  padding: 4px 8px;
-  background: var(--code-bg);
+.login-card select:focus {
+    border-color: var(--color-border-focus);
+    background-color: #ffffff;
+    box-shadow: var(--shadow-focus);
+}
+
+/* Register page form spacing */
+.login-card form {
+    gap: 18px;
+}
+
+/* Make labels consistent */
+.login-card label {
+    display: block;
+    margin-bottom: 6px;
+}
+
+/* Register button */
+.login-card button[type="submit"] {
+    margin-top: 4px;
+}
+
+/* Links */
+.login-card a {
+    color: var(--color-primary);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.login-card a:hover {
+    color: var(--color-primary-hover);
+    text-decoration: underline;
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+    .login-card {
+        padding: 28px 20px;
+    }
 }
