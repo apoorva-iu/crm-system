@@ -8,7 +8,6 @@ import Customers from "./pages/Customers";
 import ManagerDashboard from "./pages/ManagerDashboard";
 import SalesDashboard from "./pages/SalesDashboard";
 
-<h1>Main Branch Title</h1>
 
 // Helper function to extract user object from storage
 const getCurrentUser = () => {
