@@ -2,6 +2,10 @@ const bcrypt = require("bcryptjs");
 const User = require("../models/User");
 const jwt = require("jsonwebtoken");
 
+// ======================
+// Register User
+// @route   POST /api/auth/register
+// ======================
 const registerUser = async (req, res) => {
     try {
         const { name, email, password, role } = req.body;
@@ -16,6 +20,10 @@ const registerUser = async (req, res) => {
             });
         }
 
+        // Ensure role strictly conforms to Mongoose Enum: ['Admin', 'Manager', 'Sales']
+        const validRoles = ["Admin", "Manager", "Sales"];
+        const userRole = validRoles.includes(role) ? role : "Sales";
+
         // Hash password
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
@@ -25,24 +33,47 @@ const registerUser = async (req, res) => {
             name,
             email,
             password: hashedPassword,
-            role,
+            role: userRole,
         });
 
-        res.status(201).json({
+        // Generate JWT Token on registration
+        const token = jwt.sign(
+            {
+                id: user._id,
+                role: user.role,
+            },
+            process.env.JWT_SECRET,
+            {
+                expiresIn: "7d",
+            }
+        );
+
+        return res.status(201).json({
             success: true,
             message: "User Registered Successfully",
-            user,
+            token,
+            user: {
+                id: user._id,
+                name: user.name,
+                email: user.email,
+                role: user.role,
+            },
         });
 
     } catch (error) {
-        console.error(error);
+        console.error("Register Error:", error);
 
-        res.status(500).json({
+        return res.status(500).json({
             success: false,
-            message: "Server Error",
+            message: error.message || "Server Error",
         });
     }
 };
+
+// ======================
+// Login User
+// @route   POST /api/auth/login
+// ======================
 const loginUser = async (req, res) => {
     try {
         const { email, password } = req.body;
@@ -79,7 +110,7 @@ const loginUser = async (req, res) => {
             }
         );
 
-        res.status(200).json({
+        return res.status(200).json({
             success: true,
             message: "Login Successful",
             token,
@@ -92,9 +123,9 @@ const loginUser = async (req, res) => {
         });
 
     } catch (error) {
-        console.error(error);
+        console.error("Login Error:", error);
 
-        res.status(500).json({
+        return res.status(500).json({
             success: false,
             message: "Server Error",
         });

@@ -9,7 +9,7 @@ const Register = () => {
         name: "",
         email: "",
         password: "",
-        role: "User",
+        role: "Sales", // Default role set to "Sales"
     });
 
     const [error, setError] = useState("");
@@ -28,20 +28,21 @@ const Register = () => {
         setLoading(true);
 
         try {
-            await axios.post(
+            const response = await axios.post(
                 "http://localhost:5000/api/auth/register",
                 formData
             );
 
-            alert("Registration successful! Please login.");
-
-            navigate("/login");
-
-        } catch (error) {
-            console.error("Register error:", error);
+            if (response.data.success) {
+                alert("Registration successful! Please login.");
+                navigate("/login");
+            }
+        } catch (err) {
+            console.error("Register error:", err);
 
             setError(
-                error.response?.data?.message ||
+                err.response?.data?.message ||
+                err.response?.data?.error ||
                 "Registration failed. Please try again."
             );
         } finally {
@@ -107,9 +108,9 @@ const Register = () => {
                             value={formData.role}
                             onChange={handleChange}
                         >
-                            <option value="User">Sales</option>
-                            <option value="Admin">Admin</option>
+                            <option value="Sales">Sales</option>
                             <option value="Manager">Manager</option>
+                            <option value="Admin">Admin</option>
                         </select>
                     </div>
 

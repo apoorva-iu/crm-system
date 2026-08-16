@@ -1,5 +1,7 @@
 require("dotenv").config();   // Loads .env first
 
+
+
 console.log("Mongo URI:", process.env.MONGODB_URI);
 
 const express = require("express");
@@ -12,6 +14,8 @@ const customerRoutes = require("./routes/customerRoutes");
 const dashboardRoutes = require("./routes/dashboardRoutes");
 const followUpRoutes = require("./routes/followUpRoutes");
 const activityRoutes = require("./routes/activityRoutes");
+const userRoutes = require("./routes/userRoutes");
+const notificationRoutes = require("./routes/notificationRoutes");
 
 const app = express();
 
@@ -40,6 +44,8 @@ app.use("/api/customers", customerRoutes);
 app.use("/api/dashboard", dashboardRoutes);
 app.use("/api/followups", followUpRoutes);
 app.use("/api/activities", activityRoutes);
+app.use("/api/users", userRoutes);
+app.use("/api/notifications", notificationRoutes);
 
 // ==============================
 // Test Routes
