@@ -766,26 +766,39 @@ function Customers() {
 
             {/* VIEW CUSTOMER MODAL */}
             {selectedCustomer && (
-                <div className="modal-overlay">
-                    <div className="modal" style={{ maxWidth: "460px", width: "92%", margin: "auto", boxSizing: "border-box" }}>
-                        <div className="modal-header">
-                            <div className="header-left">
-                                <span className="modal-icon">👤</span>
+                <div className="modal-overlay" style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+                    <div 
+                        className="modal" 
+                        style={{ 
+                            maxWidth: "520px", 
+                            width: "92%", 
+                            margin: "auto", 
+                            borderRadius: "16px",
+                            overflow: "hidden",
+                            display: "flex",
+                            flexDirection: "column",
+                            background: "#fff"
+                        }}
+                    >
+                        <div className="modal-header" style={{ padding: "20px 24px", borderBottom: "1px solid #f1f5f9", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                            <div className="header-left" style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                                <span className="modal-icon" style={{ fontSize: "20px" }}>👤</span>
                                 <div>
-                                    <h2>Customer Details</h2>
-                                    <p className="subtitle">{selectedCustomer.name}</p>
+                                    <h2 style={{ margin: 0, fontSize: "18px", fontWeight: "700" }}>Customer Details</h2>
+                                    <p className="subtitle" style={{ margin: "2px 0 0 0", fontSize: "13px", color: "#64748b" }}>{selectedCustomer.name}</p>
                                 </div>
                             </div>
                             <button
                                 className="modal-close"
                                 onClick={() => setSelectedCustomer(null)}
                                 title="Close modal"
+                                style={{ cursor: "pointer" }}
                             >
                                 ✕
                             </button>
                         </div>
 
-                        <div className="modal-body" style={{ maxHeight: "70vh", overflowY: "auto", padding: "16px 20px", display: "flex", flexDirection: "column", gap: "16px", boxSizing: "border-box" }}>
+                        <div className="modal-body" style={{ maxHeight: "calc(80vh - 140px)", overflowY: "auto", padding: "20px 24px", boxSizing: "border-box", display: "flex", flexDirection: "column", gap: "16px" }}>
                             {viewLoading && (
                                 <p style={{ fontSize: "12px", color: "var(--cp-purple)", margin: 0 }}>
                                     Refreshing latest information...
@@ -793,31 +806,31 @@ function Customers() {
                             )}
 
                             <div style={{ width: "100%", display: "flex", flexDirection: "column", gap: "10px" }}>
-                                <h3 className="section-heading" style={{ margin: "0 0 4px 0" }}>CUSTOMER INFORMATION</h3>
-                                <div style={{ display: "flex", flexDirection: "column", gap: "8px", width: "100%" }}>
-                                    <div className="info-item">
-                                        <span className="info-label">Name</span>
-                                        <span className="info-value font-semibold">{selectedCustomer.name}</span>
+                                <h3 style={{ margin: "0 0 4px 0", fontSize: "12px", fontWeight: "700", letterSpacing: "0.05em", color: "#4f46e5", textTransform: "uppercase" }}>Customer Information</h3>
+                                <div style={{ display: "flex", flexDirection: "column", gap: "10px", width: "100%" }}>
+                                    <div className="info-item" style={{ display: "flex", justifyContent: "space-between", borderBottom: "1px solid #f8fafc", paddingBottom: "6px" }}>
+                                        <span className="info-label" style={{ color: "#64748b", fontSize: "13px" }}>Name</span>
+                                        <span className="info-value font-semibold" style={{ fontSize: "14px", fontWeight: "600" }}>{selectedCustomer.name}</span>
                                     </div>
-                                    <div className="info-item">
-                                        <span className="info-label">Email</span>
-                                        <span className="info-value">{selectedCustomer.email || "-"}</span>
+                                    <div className="info-item" style={{ display: "flex", justifyContent: "space-between", borderBottom: "1px solid #f8fafc", paddingBottom: "6px" }}>
+                                        <span className="info-label" style={{ color: "#64748b", fontSize: "13px" }}>Email</span>
+                                        <span className="info-value" style={{ fontSize: "14px" }}>{selectedCustomer.email || "-"}</span>
                                     </div>
-                                    <div className="info-item">
-                                        <span className="info-label">Phone</span>
-                                        <span className="info-value">{selectedCustomer.phone || "-"}</span>
+                                    <div className="info-item" style={{ display: "flex", justifyContent: "space-between", borderBottom: "1px solid #f8fafc", paddingBottom: "6px" }}>
+                                        <span className="info-label" style={{ color: "#64748b", fontSize: "13px" }}>Phone</span>
+                                        <span className="info-value" style={{ fontSize: "14px" }}>{selectedCustomer.phone || "-"}</span>
                                     </div>
-                                    <div className="info-item">
-                                        <span className="info-label">Company</span>
-                                        <span className="info-value">{selectedCustomer.company || "-"}</span>
+                                    <div className="info-item" style={{ display: "flex", justifyContent: "space-between", borderBottom: "1px solid #f8fafc", paddingBottom: "6px" }}>
+                                        <span className="info-label" style={{ color: "#64748b", fontSize: "13px" }}>Company</span>
+                                        <span className="info-value" style={{ fontSize: "14px" }}>{selectedCustomer.company || "-"}</span>
                                     </div>
-                                    <div className="info-item">
-                                        <span className="info-label">Status</span>
-                                        <span className="info-value">{selectedCustomer.status || "Lead"}</span>
+                                    <div className="info-item" style={{ display: "flex", justifyContent: "space-between", borderBottom: "1px solid #f8fafc", paddingBottom: "6px" }}>
+                                        <span className="info-label" style={{ color: "#64748b", fontSize: "13px" }}>Status</span>
+                                        <span className="info-value" style={{ fontSize: "14px" }}>{selectedCustomer.status || "Lead"}</span>
                                     </div>
-                                    <div className="info-item">
-                                        <span className="info-label">Assigned To</span>
-                                        <span className="info-value">
+                                    <div className="info-item" style={{ display: "flex", justifyContent: "space-between" }}>
+                                        <span className="info-label" style={{ color: "#64748b", fontSize: "13px" }}>Assigned To</span>
+                                        <span className="info-value" style={{ fontSize: "14px" }}>
                                             {selectedCustomer.assignedTo?.name || selectedCustomer.assignedTo?.email || "Unassigned"}
                                         </span>
                                     </div>
@@ -825,16 +838,16 @@ function Customers() {
                             </div>
 
                             {/* NOTES SECTION */}
-                            <div style={{ width: "100%", marginTop: "4px" }}>
-                                <h3 className="section-heading" style={{ margin: "0 0 8px 0" }}>📝 Private Scratchpad Notes</h3>
+                            <div style={{ width: "100%", marginTop: "8px", borderTop: "1px solid #f1f5f9", paddingTop: "14px" }}>
+                                <h3 style={{ margin: "0 0 8px 0", fontSize: "12px", fontWeight: "700", color: "#4f46e5", textTransform: "uppercase" }}>📝 Private Scratchpad Notes</h3>
                                 {viewNotes.length > 0 ? (
-                                    <div className="notes-list">
+                                    <div className="notes-list" style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
                                         {viewNotes.map((item, index) => {
                                             const { text: noteText, author, date: noteDate } = getNoteFields(item);
                                             return (
-                                                <div className="note-item" key={item._id || index} style={{ marginBottom: "8px" }}>
-                                                    <p className="note-text" style={{ margin: 0 }}>{noteText}</p>
-                                                    <div className="note-meta-row" style={{ display: "flex", justifyContent: "space-between", fontSize: "11px", color: "var(--cp-text-faint)", marginTop: "4px" }}>
+                                                <div className="note-item" key={item._id || index} style={{ padding: "10px", background: "#f8fafc", borderRadius: "8px", border: "1px solid #e2e8f0" }}>
+                                                    <p className="note-text" style={{ margin: 0, fontSize: "13px", color: "#1e293b" }}>{noteText}</p>
+                                                    <div className="note-meta-row" style={{ display: "flex", justifyContent: "space-between", fontSize: "11px", color: "#94a3b8", marginTop: "4px" }}>
                                                         {author && <span>By: {author}</span>}
                                                         {noteDate && <span>{formatDate(noteDate)}</span>}
                                                     </div>
@@ -843,13 +856,13 @@ function Customers() {
                                         })}
                                     </div>
                                 ) : (
-                                    <p style={{ margin: 0, fontSize: "13px", color: "var(--cp-text-muted)" }}>No notes recorded.</p>
+                                    <p style={{ margin: 0, fontSize: "13px", color: "#94a3b8" }}>No notes recorded.</p>
                                 )}
                             </div>
 
                             {/* DOCUMENTS SECTION */}
-                            <div style={{ width: "100%", marginTop: "4px" }}>
-                                <h3 className="section-heading" style={{ margin: "0 0 8px 0" }}>📎 Documents</h3>
+                            <div style={{ width: "100%", marginTop: "8px", borderTop: "1px solid #f1f5f9", paddingTop: "14px" }}>
+                                <h3 style={{ margin: "0 0 8px 0", fontSize: "12px", fontWeight: "700", color: "#4f46e5", textTransform: "uppercase" }}>📎 Documents</h3>
                                 {viewDocuments.length > 0 ? (
                                     <div className="documents-grid" style={{ display: "flex", flexDirection: "column", gap: "8px", width: "100%" }}>
                                         {viewDocuments.map((doc, index) => {
@@ -868,7 +881,7 @@ function Customers() {
                                                     </div>
                                                     {fileUrl !== "#" && (
                                                         <div className="doc-card-actions">
-                                                            <a href={fileUrl} target="_blank" rel="noopener noreferrer" className="doc-action-btn" style={{ fontSize: "11px", padding: "2px 8px" }}>Open</a>
+                                                            <a href={fileUrl} target="_blank" rel="noopener noreferrer" className="doc-action-btn" style={{ fontSize: "11px", padding: "3px 8px", background: "#f1f5f9", borderRadius: "4px", textDecoration: "none", color: "#334155" }}>Open</a>
                                                         </div>
                                                     )}
                                                 </div>
@@ -876,12 +889,12 @@ function Customers() {
                                         })}
                                     </div>
                                 ) : (
-                                    <p style={{ margin: 0, fontSize: "13px", color: "var(--cp-text-muted)" }}>No files uploaded yet.</p>
+                                    <p style={{ margin: 0, fontSize: "13px", color: "#94a3b8" }}>No files uploaded yet.</p>
                                 )}
                             </div>
                         </div>
 
-                        <div className="modal-footer">
+                        <div className="modal-footer" style={{ padding: "16px 24px", borderTop: "1px solid #f1f5f9", display: "flex", justifyContent: "flex-end", background: "#f8fafc" }}>
                             <button type="button" className="btn-modal-close" onClick={() => setSelectedCustomer(null)}>
                                 Close
                             </button>
@@ -892,87 +905,155 @@ function Customers() {
 
             {/* EDIT / ADD MODAL */}
             {showModal && (
-                <div className="modal-overlay">
-                    <div className="modal" style={{ maxWidth: "460px", width: "92%", margin: "auto", boxSizing: "border-box" }}>
-                        <div className="modal-header">
-                            <div className="header-left">
-                                <span className="modal-icon">✏️</span>
+                <div className="modal-overlay" style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+                    <div 
+                        className="modal" 
+                        style={{ 
+                            maxWidth: "520px", 
+                            width: "92%", 
+                            margin: "auto", 
+                            borderRadius: "16px",
+                            overflow: "hidden",
+                            display: "flex",
+                            flexDirection: "column",
+                            background: "#fff"
+                        }}
+                    >
+                        {/* Header */}
+                        <div className="modal-header" style={{ padding: "20px 24px", borderBottom: "1px solid #f1f5f9", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                            <div className="header-left" style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                                <span className="modal-icon" style={{ fontSize: "20px" }}>✏️</span>
                                 <div>
-                                    <h2>{editingCustomer ? "Edit Customer" : "Add Customer"}</h2>
-                                    <p className="subtitle">{editingCustomer ? editingCustomer.name : "Create a new customer profile"}</p>
+                                    <h2 style={{ margin: 0, fontSize: "18px", fontWeight: "700" }}>
+                                        {editingCustomer ? "Edit Customer" : "Add Customer"}
+                                    </h2>
+                                    <p className="subtitle" style={{ margin: "2px 0 0 0", fontSize: "13px", color: "#64748b" }}>
+                                        {editingCustomer ? editingCustomer.name : "Create a new customer profile"}
+                                    </p>
                                 </div>
                             </div>
-                            <button className="modal-close" onClick={() => setShowModal(false)}>✕</button>
+                            <button className="modal-close" onClick={() => setShowModal(false)} style={{ cursor: "pointer" }}>✕</button>
                         </div>
 
-                        <div className="modal-body" style={{ maxHeight: "70vh", overflowY: "auto", padding: "16px 20px", display: "flex", flexDirection: "column", gap: "16px", boxSizing: "border-box" }}>
-                            {modalError && <div className="error-message" style={{ marginBottom: "8px", fontSize: "13px" }}>{modalError}</div>}
-                            {modalSuccess && <div style={{ background: "var(--cp-green-bg)", border: "1px solid #a7f3d0", color: "var(--cp-green)", padding: "10px 14px", borderRadius: "8px", fontSize: "13px", marginBottom: "8px" }}>{modalSuccess}</div>}
+                        {/* Modal Body */}
+                        <div 
+                            className="modal-body" 
+                            style={{ 
+                                maxHeight: "calc(80vh - 140px)", 
+                                overflowY: "auto", 
+                                padding: "20px 24px", 
+                                boxSizing: "border-box" 
+                            }}
+                        >
+                            {modalError && <div className="error-message" style={{ marginBottom: "12px", fontSize: "13px" }}>{modalError}</div>}
+                            {modalSuccess && <div style={{ background: "var(--cp-green-bg, #ecfdf5)", border: "1px solid #a7f3d0", color: "var(--cp-green, #059669)", padding: "10px 14px", borderRadius: "8px", fontSize: "13px", marginBottom: "12px" }}>{modalSuccess}</div>}
 
-                            <form onSubmit={handleSubmit} id="customer-edit-form" style={{ width: "100%" }}>
-                                <div style={{ width: "100%", display: "flex", flexDirection: "column", gap: "12px" }}>
-                                    <h3 className="section-heading" style={{ margin: "0 0 2px 0" }}>CUSTOMER INFORMATION</h3>
+                            <form onSubmit={handleSubmit} id="customer-edit-form" style={{ width: "100%", display: "flex", flexDirection: "column", gap: "14px" }}>
+                                <h3 style={{ margin: "0 0 4px 0", fontSize: "12px", fontWeight: "700", letterSpacing: "0.05em", color: "#4f46e5", textTransform: "uppercase" }}>
+                                    Customer Information
+                                </h3>
 
-                                    <div style={{ width: "100%" }}>
-                                        <label style={{ display: "block", marginBottom: "4px", fontSize: "13px", fontWeight: "600" }}>Name *</label>
-                                        <input style={{ width: "100%", boxSizing: "border-box", padding: "8px 12px" }} name="name" value={formData.name} onChange={handleChange} required placeholder="Full Name" />
-                                    </div>
+                                <div style={{ width: "100%" }}>
+                                    <label style={{ display: "block", marginBottom: "6px", fontSize: "13px", fontWeight: "600", color: "#334155" }}>Name *</label>
+                                    <input 
+                                        style={{ width: "100%", maxWidth: "100%", boxSizing: "border-box", padding: "10px 14px", borderRadius: "8px", border: "1px solid #e2e8f0", fontSize: "14px", outline: "none" }} 
+                                        name="name" 
+                                        value={formData.name} 
+                                        onChange={handleChange} 
+                                        required 
+                                        placeholder="Full Name" 
+                                    />
+                                </div>
 
-                                    <div style={{ width: "100%" }}>
-                                        <label style={{ display: "block", marginBottom: "4px", fontSize: "13px", fontWeight: "600" }}>Email</label>
-                                        <input style={{ width: "100%", boxSizing: "border-box", padding: "8px 12px" }} type="email" name="email" value={formData.email} onChange={handleChange} placeholder="email@domain.com" />
-                                    </div>
+                                <div style={{ width: "100%" }}>
+                                    <label style={{ display: "block", marginBottom: "6px", fontSize: "13px", fontWeight: "600", color: "#334155" }}>Email</label>
+                                    <input 
+                                        style={{ width: "100%", maxWidth: "100%", boxSizing: "border-box", padding: "10px 14px", borderRadius: "8px", border: "1px solid #e2e8f0", fontSize: "14px", outline: "none" }} 
+                                        type="email" 
+                                        name="email" 
+                                        value={formData.email} 
+                                        onChange={handleChange} 
+                                        placeholder="email@domain.com" 
+                                    />
+                                </div>
 
-                                    <div style={{ width: "100%" }}>
-                                        <label style={{ display: "block", marginBottom: "4px", fontSize: "13px", fontWeight: "600" }}>Phone</label>
-                                        <input style={{ width: "100%", boxSizing: "border-box", padding: "8px 12px" }} name="phone" value={formData.phone} onChange={handleChange} placeholder="Phone number" />
-                                    </div>
+                                <div style={{ width: "100%" }}>
+                                    <label style={{ display: "block", marginBottom: "6px", fontSize: "13px", fontWeight: "600", color: "#334155" }}>Phone</label>
+                                    <input 
+                                        style={{ width: "100%", maxWidth: "100%", boxSizing: "border-box", padding: "10px 14px", borderRadius: "8px", border: "1px solid #e2e8f0", fontSize: "14px", outline: "none" }} 
+                                        name="phone" 
+                                        value={formData.phone} 
+                                        onChange={handleChange} 
+                                        placeholder="Phone number" 
+                                    />
+                                </div>
 
-                                    <div style={{ width: "100%" }}>
-                                        <label style={{ display: "block", marginBottom: "4px", fontSize: "13px", fontWeight: "600" }}>Company</label>
-                                        <input style={{ width: "100%", boxSizing: "border-box", padding: "8px 12px" }} name="company" value={formData.company} onChange={handleChange} placeholder="Company name" />
-                                    </div>
+                                <div style={{ width: "100%" }}>
+                                    <label style={{ display: "block", marginBottom: "6px", fontSize: "13px", fontWeight: "600", color: "#334155" }}>Company</label>
+                                    <input 
+                                        style={{ width: "100%", maxWidth: "100%", boxSizing: "border-box", padding: "10px 14px", borderRadius: "8px", border: "1px solid #e2e8f0", fontSize: "14px", outline: "none" }} 
+                                        name="company" 
+                                        value={formData.company} 
+                                        onChange={handleChange} 
+                                        placeholder="Company name" 
+                                    />
+                                </div>
 
-                                    <div style={{ width: "100%" }}>
-                                        <label style={{ display: "block", marginBottom: "4px", fontSize: "13px", fontWeight: "600" }}>Status</label>
-                                        <select style={{ width: "100%", boxSizing: "border-box", padding: "8px 12px" }} name="status" value={formData.status} onChange={handleChange}>
-                                            <option value="Lead">Lead</option>
-                                            <option value="Qualified">Qualified</option>
-                                            <option value="Customer">Customer</option>
-                                            <option value="Lost">Lost</option>
-                                        </select>
-                                    </div>
+                                <div style={{ width: "100%" }}>
+                                    <label style={{ display: "block", marginBottom: "6px", fontSize: "13px", fontWeight: "600", color: "#334155" }}>Status</label>
+                                    <select 
+                                        style={{ width: "100%", maxWidth: "100%", boxSizing: "border-box", padding: "10px 14px", borderRadius: "8px", border: "1px solid #e2e8f0", fontSize: "14px", outline: "none", background: "#fff" }} 
+                                        name="status" 
+                                        value={formData.status} 
+                                        onChange={handleChange}
+                                    >
+                                        <option value="Lead">Lead</option>
+                                        <option value="Qualified">Qualified</option>
+                                        <option value="Customer">Customer</option>
+                                        <option value="Lost">Lost</option>
+                                    </select>
+                                </div>
 
-                                    <div style={{ width: "100%" }}>
-                                        <label style={{ display: "block", marginBottom: "4px", fontSize: "13px", fontWeight: "600" }}>Assigned To (Sales)</label>
-                                        <select style={{ width: "100%", boxSizing: "border-box", padding: "8px 12px" }} name="assignedTo" value={formData.assignedTo} onChange={handleChange}>
-                                            <option value="">Unassigned</option>
-                                            {salesUsers.map((u) => (
-                                                <option key={u._id} value={u._id}>
-                                                    {u.name || u.email}
-                                                </option>
-                                            ))}
-                                        </select>
-                                    </div>
+                                <div style={{ width: "100%" }}>
+                                    <label style={{ display: "block", marginBottom: "6px", fontSize: "13px", fontWeight: "600", color: "#334155" }}>Assigned To (Sales)</label>
+                                    <select 
+                                        style={{ width: "100%", maxWidth: "100%", boxSizing: "border-box", padding: "10px 14px", borderRadius: "8px", border: "1px solid #e2e8f0", fontSize: "14px", outline: "none", background: "#fff" }} 
+                                        name="assignedTo" 
+                                        value={formData.assignedTo} 
+                                        onChange={handleChange}
+                                    >
+                                        <option value="">Unassigned</option>
+                                        {salesUsers.map((u) => (
+                                            <option key={u._id} value={u._id}>
+                                                {u.name || u.email}
+                                            </option>
+                                        ))}
+                                    </select>
                                 </div>
                             </form>
 
                             {editingCustomer && (
                                 <>
-                                    <div style={{ width: "100%", marginTop: "8px" }}>
-                                        <h3 className="section-heading" style={{ margin: "0 0 8px 0" }}>📝 Add Private Scratchpad Note</h3>
+                                    <div style={{ width: "100%", marginTop: "16px", borderTop: "1px solid #f1f5f9", paddingTop: "16px" }}>
+                                        <h3 style={{ margin: "0 0 8px 0", fontSize: "12px", fontWeight: "700", color: "#4f46e5", textTransform: "uppercase" }}>📝 Scratchpad Note</h3>
                                         <div className="note-input-container">
-                                            <textarea className="notes-textarea" style={{ width: "100%", boxSizing: "border-box" }} placeholder="Write a private note..." value={note} onChange={(e) => setNote(e.target.value)} />
-                                            <div className="note-actions">
+                                            <textarea 
+                                                className="notes-textarea" 
+                                                style={{ width: "100%", maxWidth: "100%", boxSizing: "border-box", padding: "10px", borderRadius: "8px", border: "1px solid #e2e8f0" }} 
+                                                placeholder="Write a private note..." 
+                                                value={note} 
+                                                onChange={(e) => setNote(e.target.value)} 
+                                            />
+                                            <div className="note-actions" style={{ marginTop: "6px" }}>
                                                 <button type="button" className="btn-save-note" onClick={handleAddNote} disabled={addingNote}>
-                                                    {addingNote ? "Adding..." : "+ Add Private Note"}
+                                                    {addingNote ? "Adding..." : "+ Add Note"}
                                                 </button>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div style={{ width: "100%", marginTop: "8px" }}>
-                                        <h3 className="section-heading" style={{ margin: "0 0 8px 0" }}>📎 Documents</h3>
+                                    <div style={{ width: "100%", marginTop: "16px", borderTop: "1px solid #f1f5f9", paddingTop: "16px" }}>
+                                        <h3 style={{ margin: "0 0 8px 0", fontSize: "12px", fontWeight: "700", color: "#4f46e5", textTransform: "uppercase" }}>📎 Documents</h3>
                                         <div className="file-upload-card" style={{ width: "100%", boxSizing: "border-box" }}>
                                             <input type="file" id="edit-customer-file-upload" className="hidden-file-input" onChange={(e) => setSelectedFile(e.target.files[0])} />
                                             {!selectedFile ? (
@@ -994,7 +1075,8 @@ function Customers() {
                             )}
                         </div>
 
-                        <div className="modal-footer" style={{ gap: "10px" }}>
+                        {/* Footer */}
+                        <div className="modal-footer" style={{ padding: "16px 24px", borderTop: "1px solid #f1f5f9", display: "flex", justifyContent: "flex-end", gap: "10px", background: "#f8fafc" }}>
                             <button type="button" className="btn-modal-close" onClick={() => setShowModal(false)}>Cancel</button>
                             <button type="submit" form="customer-edit-form" className="btn-save-note" disabled={saving}>
                                 {saving ? "Saving..." : "Save Changes"}
